@@ -7,15 +7,18 @@ const Game = () => {
     const [board,setBoard]=useState(Array(9).fill(null));
     const [xIsNext,setXisNext]=useState(true)
     const winner = getWinner(board)
+    const [isActive, setIsActive] = useState(false);
+
 
    const handleClick=(index)=>{
         const boardCopy=[...board]
         console.log( boardCopy[index])
         if(winner || boardCopy[index]) return
         boardCopy[index]= xIsNext?'X':'0'
+       setIsActive(current => !current);
         setBoard(boardCopy)
         setXisNext(!xIsNext)
-        
+
     }
     const startNewGame =()=>{
         return (
@@ -26,10 +29,11 @@ const Game = () => {
         }>Очистить поле</button>
         )
     }
+
     return (
         <div className='wrapper'>
             {startNewGame()}
-            <Board arrayOfsquares={board} click={handleClick}/>
+            <Board arrayOfsquares={board} click={handleClick} isActive={isActive}/>
             <p className='gameInfo'>
                 {winner? 'победитель '+winner
                 :board.every((el)=>!!el)
