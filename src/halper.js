@@ -15,7 +15,7 @@ for(let i=0;i<lines.length;i++){
    
     if(arr[a]&&arr[a]===arr[b] && arr[a]===arr[c]){
         
-        return arr[a]
+        return {player:arr[a],line:lines[i]}
     }
       
         
