@@ -5,13 +5,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    color:aquamarine;
+    /*flex-direction: column;*/
+}
+.wrapper div{
+    margin-right: 20px;
+
 }
 .gameInfo{
-    color:aquamarine;
+
     font-size: 25px;
     font-weight: bold;
     margin-top: 15px;
+}
+.history{
+    min-height: 300px;
 }
 .startBtn{
     width:200px;
@@ -25,4 +33,7 @@
     color:rgb(8, 17, 48);
     background-color:#ffffff; 
     transition: 1s all ease
+}
+li{
+    list-style: none;
 }

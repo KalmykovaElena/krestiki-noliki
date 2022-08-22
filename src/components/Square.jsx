@@ -5,7 +5,7 @@ const Square = (props) => {
 
 
     return (
-        <button className='square' style={{backgroundColor: props.isActive ? 'red' : ''}} onClick={props.onClick}>
+        <button className='square' style={{backgroundColor:props.bgColor}} onClick={props.onClick}>
             {props.value}
         </button>
     );
