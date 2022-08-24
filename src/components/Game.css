@@ -8,8 +8,9 @@
     color:aquamarine;
     /*flex-direction: column;*/
 }
-.wrapper div{
+.wrapper-content{
     margin-right: 20px;
+    text-align: center;
 
 }
 .gameInfo{

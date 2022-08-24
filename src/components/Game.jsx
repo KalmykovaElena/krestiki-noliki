@@ -8,29 +8,31 @@ const Game = () => {
     const [xIsNext,setXisNext]=useState(true)
     const [stepNumber,setStepNumber]=useState(0)
     const winner = getWinner(board[stepNumber])
-    const [color,setColor]=useState('')
-    const [current,setCurrent]=useState('')
+    const [currentIndex,setCurrentIndex]=useState('')
+    const [listOftIndexes,setListOfIndexes]=useState({})
 
 
    const handleClick=(index)=>{
        const historyPoint=board.slice(0,stepNumber+1)
        const current=historyPoint[stepNumber]
-
        const squares=[...current]
+const indexes= {...listOftIndexes}
+       indexes[stepNumber]=index
+       setListOfIndexes(indexes)
        if(winner || squares[index]) return
        squares[index]= xIsNext?'X':'0'
-       setCurrent(index)
+       setCurrentIndex(index)
        setBoard([...historyPoint,squares])
        setStepNumber(historyPoint.length)
         setXisNext(!xIsNext)
-       setColor('green')
+
 
     }
     const startNewGame =()=>{
         return (
         <button className='startBtn' onClick={()=>{
             jumpTo(0)
-            setCurrent('')
+            setCurrentIndex('')
         }
         }>Очистить поле</button>
         )
@@ -38,24 +40,30 @@ const Game = () => {
     const jumpTo=(step)=>{
         setStepNumber(step)
         setXisNext(step%2===0)
-        console.log(stepNumber)
-    }
+        setCurrentIndex(listOftIndexes[step-1])
+           }
+
 const renderMoves=()=>{
+   
    return board.map((el,ind)=>{
             const destination = ind?`Go to move #${ind}`:`Go to start`
             return <li key={ind}>
-                <button  onClick={()=>jumpTo(ind)}>{destination}</button>
+                <button  onClick={()=> {
+                    jumpTo(ind)
+                }
+                }>
+                    {ind === stepNumber ? <b>{destination}</b> : destination} </button>
             </li>
         })
 }
 
     return (
         <div className='wrapper'>
-            <div>
+            <div className='wrapper-content'>
             {startNewGame()}
-            <Board arrayOfsquares={board[stepNumber]} color={color} click={handleClick}
+            <Board arrayOfsquares={board[stepNumber]}  click={handleClick}
             winningSquares={winner?winner.line:[]}
-                   current={current}
+                   current={currentIndex}
             />
             <p className='gameInfo'>
                 {winner? 'победитель '+winner.player
